@@ -18,10 +18,15 @@ static class forName(String className) throws ClassNotFoundException
 クラス名は、使用するRDBMSによって異なる
 
 JDBC Driver	クラス名
+
 MySQL	com.mysql.jdbc.Driver
+
 Oracle	oracle.jdbc.driver.OracleDriver
+
 PostgreSQL	org.postgresql.Driver
+
 SQLServer	com.microsoft.sqlserver.jdbc.SQLServerDriver
+
 TimesTen	com.timesten.jdbc.TimesTenDriver
 
 データベースと接続するには、DriverManager.getConnection() メソッドを使用
