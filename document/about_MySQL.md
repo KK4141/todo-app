@@ -16,6 +16,6 @@ DL先　https://www.mysql.com/jp/ </br>
 # インストール時の設定
 
 セットアップタイプ　Developer Default</br>
-コンフィグタイプ　Development Coomputer</br>
+コンフィグタイプ　Development Computer</br>
 TCP/IP ポート　デフォルト</br>
 パスワード形式　 Use Strong Password Encryption for Authentication</br>
