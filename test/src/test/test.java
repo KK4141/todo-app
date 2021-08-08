@@ -50,7 +50,7 @@ public class test {
 			stmt.executeUpdate(sql);
 			con.close();
 			stmt.close();
-			
+
 			url = "jdbc:mysql://localhost/todo";
 			con = DriverManager.getConnection(url,"root","admin");
 			stmt = con.createStatement();
