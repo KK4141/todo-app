@@ -10,17 +10,19 @@ public class test {
 
 	public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		String DBName = "todo";
+		String todo = "テスト";
 		int flag = checkDataBase(DBName);
 		if(flag == 0) {createDataBase(DBName);}
+		if(flag == 1) {writer.insertTable(DBName,todo);}
 		Connection con = null;
 		Statement stmt = null;
 		ResultSet rs = null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-			String url = "jdbc:mysql://localhost/test";
+			String url = "jdbc:mysql://localhost/" + DBName;
 			con = DriverManager.getConnection(url,"root","admin");
 			stmt = con.createStatement();
-			String sql = "SELECT id, todo FROM test.new_table";
+			String sql = "SELECT id, todo FROM todo.todolist";
 			rs = stmt.executeQuery(sql);
 			while(rs.next()) {
 				System.out.println("id : " + rs.getInt(1));
@@ -51,10 +53,10 @@ public class test {
 			con.close();
 			stmt.close();
 
-			url = "jdbc:mysql://localhost/todo";
+			url = "jdbc:mysql://localhost/" + DBName;
 			con = DriverManager.getConnection(url,"root","admin");
 			stmt = con.createStatement();
-			sql = "CREATE TABLE todoList(id int primary key,todo varchar(255));";
+			sql = "CREATE TABLE todoList(id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,todo varchar(255));";
 			System.out.println(sql);
 			stmt.executeUpdate(sql);
 
