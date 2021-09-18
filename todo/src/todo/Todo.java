@@ -1,16 +1,20 @@
-package test;
+package todo;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Scanner;
 
-public class test {
+public class Todo {
 
 	public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		String DBName = "todo";
 		String todo = "テスト";
+		Scanner sc = new Scanner(System.in);
+		System.out.println("登録したいことを入力してエンターを押下してください。");
+		todo = sc.next();
 		int flag = checkDataBase(DBName);
 		if(flag == 0) {createDataBase(DBName);}
 		if(flag == 1) {writer.insertTable(DBName,todo);}
@@ -25,12 +29,13 @@ public class test {
 			String sql = "SELECT id, todo FROM todo.todolist";
 			rs = stmt.executeQuery(sql);
 			while(rs.next()) {
-				System.out.println("id : " + rs.getInt(1));
+				System.out.print("id : " + rs.getInt(1));
 				System.out.println("todo :" + rs.getString(2));
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
 		}finally {
+			sc.close();
 			try {
 				if(rs != null) rs.close();
 				if(stmt != null) stmt.close();
@@ -40,6 +45,7 @@ public class test {
 			}
 		}
 	}
+
 	static void createDataBase(String DBName) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
 		Connection con = null;
 		Statement stmt = null;
@@ -56,8 +62,8 @@ public class test {
 			url = "jdbc:mysql://localhost/" + DBName;
 			con = DriverManager.getConnection(url,"root","admin");
 			stmt = con.createStatement();
-			sql = "CREATE TABLE todoList(id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,todo varchar(255));";
-			System.out.println(sql);
+			sql = "CREATE TABLE todoList(id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,todo varchar(255), delflag INT(1));";
+			System.out.println(sql + 1);
 			stmt.executeUpdate(sql);
 
 		}catch(SQLException e){

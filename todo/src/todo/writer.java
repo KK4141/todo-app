@@ -1,4 +1,4 @@
-package test;
+package todo;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,7 +14,7 @@ public class writer {
 			String url = "jdbc:mysql://localhost/" + DBName;
 			con = DriverManager.getConnection(url,"root","admin");
 			stmt = con.createStatement();
-			String sql = "INSERT INTO todolist VALUES (0, '"+ todo +"');";
+			String sql = "INSERT INTO todolist VALUES (0, '"+ todo +"',0);";
 			stmt.executeUpdate(sql);
 		}catch(SQLException e){
 			e.printStackTrace();
